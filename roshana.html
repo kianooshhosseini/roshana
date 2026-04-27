@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>روشنا | دسترسی آزاد به علم و هوش مصنوعی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --amber:       #d97706;
+  --amber-dark:  #92400e;
+  --amber-glow:  #fbbf24;
+  --amber-pale:  #fef3c7;
+  --teal:        #0f766e;
+  --teal-dark:   #134e4a;
+  --teal-pale:   #f0fdfa;
+  --ink:         #0f172a;
+  --ink-soft:    #1e293b;
+  --slate:       #475569;
+  --muted:       #94a3b8;
+  --border:      #e2e8f0;
+  --surface:     #ffffff;
+  --bg:          #f8fafc;
+  --radius-sm:   8px;
+  --radius:      16px;
+  --radius-lg:   24px;
+  --shadow-xs:   0 1px 3px rgba(0,0,0,.06);
+  --shadow:      0 4px 16px rgba(0,0,0,.08);
+  --shadow-lg:   0 16px 48px rgba(0,0,0,.12);
+  --shadow-xl:   0 32px 64px rgba(0,0,0,.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Vazirmatn',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.8;overflow-x:hidden}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.12s}
+.reveal-delay-2{transition-delay:.24s}
+.reveal-delay-3{transition-delay:.36s}
+.reveal-delay-4{transition-delay:.48s}
+
+/* HERO */
+.hero{position:relative;background:var(--ink);color:#fff;padding:7rem 0 11rem;overflow:hidden;isolation:isolate}
+canvas#stars{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.5}
+.hero-glow-a{position:absolute;top:-15%;right:-8%;width:580px;height:580px;border-radius:50%;background:radial-gradient(circle,rgba(217,119,6,.22) 0%,transparent 65%);animation:breathe 9s ease-in-out infinite}
+.hero-glow-b{position:absolute;bottom:-20%;left:-6%;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(15,118,110,.14) 0%,transparent 65%);animation:breathe 12s ease-in-out infinite reverse}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+.hero::before{content:'';position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:48px 48px}
+.hero-inner{position:relative;z-index:2;max-width:860px;margin:0 auto;padding:0 2rem;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:.55rem;background:rgba(255,255,255,.07);border:1px solid rgba(251,191,36,.28);backdrop-filter:blur(14px);padding:.48rem 1.3rem;border-radius:9999px;font-size:.82rem;font-weight:600;color:var(--amber-glow);margin-bottom:2rem;letter-spacing:.04em}
+.badge-dot{width:7px;height:7px;border-radius:50%;background:var(--amber-glow);box-shadow:0 0 10px var(--amber-glow);animation:blink 2.2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:clamp(3rem,8vw,5.5rem);font-weight:900;line-height:1.1;margin-bottom:1.2rem;background:linear-gradient(135deg,#fde68a 0%,#fbbf24 45%,#d97706 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 48px rgba(251,191,36,.25))}
+.hero-sub{font-size:clamp(1.05rem,2.5vw,1.35rem);color:var(--muted);font-weight:300;max-width:540px;margin:0 auto 2.8rem;line-height:1.75}
+.hero-cta{display:inline-flex;align-items:center;gap:.7rem;background:linear-gradient(135deg,var(--amber) 0%,var(--amber-dark) 100%);color:#fff;padding:1rem 2.4rem;border-radius:9999px;font-family:'Vazirmatn',sans-serif;font-size:1.05rem;font-weight:700;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 32px rgba(217,119,6,.35);transition:all .28s ease}
+.hero-cta:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(217,119,6,.45)}
+.hero-cta svg{width:18px;height:18px;transition:transform .3s}
+.hero-cta:hover svg{transform:translateY(4px)}
+.hero-stats{display:flex;justify-content:center;gap:3rem;margin-top:4rem;padding-top:3rem;border-top:1px solid rgba(255,255,255,.08);flex-wrap:wrap}
+.hero-stat{text-align:center}
+.hero-stat-num{font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,#fde68a,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.hero-stat-label{font-size:.78rem;color:var(--muted);font-weight:500;letter-spacing:.05em;margin-top:.1rem}
+.wave-divider{position:absolute;bottom:-1px;left:0;width:100%;overflow:hidden;line-height:0}
+.wave-divider svg{display:block;width:calc(100% + 1px);height:90px}
+.wave-divider .fill{fill:var(--bg)}
+
+/* WHY ROSHANA */
+.why-section{position:relative;background:linear-gradient(180deg,#fffbeb 0%,var(--bg) 100%);padding:5rem 0;overflow:hidden}
+.why-section::before{content:'';position:absolute;top:-120px;left:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(217,119,6,.08) 0%,transparent 70%)}
+.why-section::after{content:'';position:absolute;bottom:-80px;right:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(15,118,110,.06) 0%,transparent 70%)}
+.why-inner{position:relative;z-index:1;max-width:720px;margin:0 auto;text-align:center;padding:0 1.5rem}
+.why-tag{display:inline-block;background:var(--amber-pale);color:var(--amber-dark);padding:.35rem 1rem;border-radius:9999px;font-size:.8rem;font-weight:700;letter-spacing:.04em;margin-bottom:1.2rem}
+.why-quote{font-size:clamp(1.6rem,4.5vw,2.6rem);font-weight:900;color:var(--ink);line-height:1.5;margin-bottom:1.5rem;position:relative;display:inline-block}
+.why-quote::before,.why-quote::after{position:absolute;font-size:3.5rem;color:var(--amber);opacity:.25;line-height:1;font-weight:300}
+.why-quote::before{content:'"';top:-10px;right:-28px}
+.why-quote::after{content:'"';bottom:-30px;left:-28px}
+.why-divider{width:60px;height:4px;background:linear-gradient(90deg,var(--amber),var(--teal));margin:1.5rem auto;border-radius:2px}
+.why-body{font-size:1.05rem;color:var(--slate);line-height:2;max-width:620px;margin:0 auto}
+.why-body strong{color:var(--amber-dark)}
+
+/* LAYOUT */
+.container{max-width:1000px;margin:0 auto;padding:0 1.75rem}
+section{padding:5rem 0}
+.section-header{text-align:center;margin-bottom:3.5rem}
+.section-tag{display:inline-block;background:var(--amber-pale);color:var(--amber-dark);padding:.32rem 1rem;border-radius:9999px;font-size:.8rem;font-weight:700;letter-spacing:.06em;margin-bottom:.9rem}
+.section-title{font-size:clamp(1.55rem,4vw,2.3rem);font-weight:800;color:var(--ink);margin-bottom:.7rem}
+.section-desc{color:var(--slate);max-width:560px;margin:0 auto;font-size:1rem}
+
+/* CARDS */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem}
+.card{background:var(--surface);border-radius:var(--radius);padding:2rem 1.75rem;border:1px solid var(--border);box-shadow:var(--shadow-xs);position:relative;overflow:hidden;transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}
+.card::after{content:'';position:absolute;top:0;right:0;width:100%;height:3px;background:linear-gradient(90deg,var(--teal),var(--amber));transform:scaleX(0);transform-origin:right;transition:transform .35s ease}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:transparent}
+.card:hover::after{transform:scaleX(1)}
+.card-icon{width:50px;height:50px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--amber-pale),#fde68a);display:grid;place-items:center;margin-bottom:1.3rem;color:var(--amber-dark)}
+.card-icon svg{width:24px;height:24px}
+.card h3{font-size:1.1rem;font-weight:700;margin-bottom:.6rem;color:var(--ink)}
+.card p{color:var(--slate);font-size:.92rem;line-height:1.75}
+
+/* HIGHLIGHT */
+.highlight-box{background:linear-gradient(135deg,var(--teal-pale) 0%,#ecfdf5 100%);border-right:4px solid var(--teal);padding:1.7rem 1.8rem 1.7rem 1.4rem;border-radius:var(--radius);margin:2rem 0;position:relative}
+.highlight-label{position:absolute;top:-13px;right:20px;background:var(--teal);color:#fff;padding:.2rem .85rem;border-radius:9999px;font-size:.75rem;font-weight:700}
+.highlight-box p{color:var(--slate);font-size:.97rem;line-height:1.8}
+.highlight-box strong{color:var(--teal-dark)}
+
+/* SURVEY */
+.survey-wrap{background:var(--surface);border-radius:var(--radius-lg);box-shadow:var(--shadow-xl);overflow:hidden;border:1px solid var(--border)}
+.survey-head{background:linear-gradient(135deg,var(--teal-dark) 0%,#0d4a46 100%);padding:2.5rem 2rem;text-align:center;position:relative;overflow:hidden}
+.survey-head::before{content:'';position:absolute;top:-40%;right:-10%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 65%)}
+.survey-head h2{font-size:1.7rem;font-weight:800;color:#fff;margin-bottom:.4rem}
+.survey-head p{color:rgba(255,255,255,.75);font-size:1rem;font-weight:300}
+.survey-body{padding:2.2rem}
+.survey-intro{text-align:center;color:var(--slate);font-size:.97rem;margin-bottom:1.8rem;padding-bottom:1.8rem;border-bottom:1px solid var(--border)}
+.questions-list{list-style:none}
+.questions-list li{display:flex;align-items:flex-start;gap:1rem;padding:1.1rem 1.25rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:.75rem;font-size:.95rem;font-weight:500;color:var(--ink-soft);transition:background .2s,transform .2s,box-shadow .2s;cursor:default}
+.questions-list li:hover{background:#fff;transform:translateX(-4px);box-shadow:var(--shadow);border-color:rgba(217,119,6,.25)}
+.q-num{min-width:30px;height:30px;border-radius:50%;background:var(--amber);color:#fff;display:grid;place-items:center;font-size:.78rem;font-weight:800;flex-shrink:0;margin-top:.1rem}
+
+/* FORM EMBED */
+.form-embed{margin-top:2rem;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:var(--surface)}
+.form-embed iframe{width:100%;min-height:600px;border:none;display:block}
+.form-fallback{text-align:center;padding:1.5rem;background:var(--bg);border-top:1px solid var(--border)}
+.fallback-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--surface);color:var(--amber-dark);padding:.8rem 1.8rem;border-radius:9999px;font-family:'Vazirmatn',sans-serif;font-size:.95rem;font-weight:700;text-decoration:none;border:2px solid var(--amber);cursor:pointer;transition:all .25s ease}
+.fallback-btn:hover{background:var(--amber-pale);transform:translateY(-2px)}
+.fallback-btn svg{width:16px;height:16px}
+
+/* ROADMAP */
+.roadmap{position:relative;max-width:680px;margin:0 auto}
+.roadmap::before{content:'';position:absolute;right:20px;top:21px;width:2px;height:calc(100% - 21px);background:linear-gradient(to bottom,var(--amber) 0%,var(--border) 100%)}
+.roadmap-item{display:flex;align-items:flex-start;gap:1.5rem;margin-bottom:1.5rem;position:relative;z-index:1}
+.roadmap-dot{min-width:42px;height:42px;border-radius:50%;background:var(--surface);border:3px solid var(--border);display:grid;place-items:center;font-size:.82rem;font-weight:800;color:var(--slate);flex-shrink:0;transition:all .3s}
+.roadmap-dot.active{background:var(--amber);border-color:var(--amber);color:#fff;animation:ringPulse 2.5s ease-in-out infinite}
+.roadmap-dot.active svg{width:16px;height:16px}
+@keyframes ringPulse{0%,100%{box-shadow:0 0 0 6px rgba(217,119,6,.18),0 0 20px rgba(217,119,6,.25)}50%{box-shadow:0 0 0 10px rgba(217,119,6,.08),0 0 32px rgba(217,119,6,.35)}}
+.roadmap-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem 1.6rem;box-shadow:var(--shadow-xs);flex:1;transition:box-shadow .25s}
+.roadmap-card:hover{box-shadow:var(--shadow)}
+.roadmap-card h4{font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.35rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.roadmap-card p{color:var(--slate);font-size:.9rem;line-height:1.7}
+.roadmap-pill{font-size:.7rem;font-weight:700;padding:.15rem .6rem;border-radius:9999px}
+.pill-active{background:#fef3c7;color:#92400e}
+.pill-next{background:#f1f5f9;color:#64748b}
+
+/* SHARE */
+.share-inner{max-width:680px;margin:0 auto;text-align:center}
+.share-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:.9rem;margin:2rem 0 1rem}
+.share-btn{display:inline-flex;align-items:center;gap:.55rem;padding:.75rem 1.6rem;border-radius:9999px;font-family:'Vazirmatn',sans-serif;font-size:.9rem;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:all .22s ease}
+.share-btn:hover{transform:translateY(-3px);filter:brightness(1.1)}
+.share-btn svg{width:17px;height:17px}
+.btn-x{background:#000;color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.btn-telegram{background:#229ED9;color:#fff;box-shadow:0 4px 16px rgba(34,158,217,.3)}
+.btn-linkedin{background:#0A66C2;color:#fff;box-shadow:0 4px 16px rgba(10,102,194,.3)}
+.btn-copy{background:var(--ink-soft);color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.copy-toast{font-size:.85rem;color:var(--teal-dark);font-weight:600;opacity:0;transition:opacity .4s;height:1.4rem;display:flex;align-items:center;justify-content:center;gap:.35rem}
+.copy-toast.show{opacity:1}
+.copy-toast svg{width:14px;height:14px}
+
+/* FOOTER */
+footer{background:var(--ink);color:var(--muted);padding:3.5rem 0 2rem;text-align:center}
+.footer-logo{font-size:1.6rem;font-weight:900;color:#fff;margin-bottom:.3rem}
+.footer-tag{font-size:.88rem;color:#475569;margin-bottom:1.6rem}
+.footer-line{width:50px;height:3px;border-radius:2px;margin:1.5rem auto;background:linear-gradient(90deg,var(--amber),var(--teal))}
+footer small{display:block;margin-top:.5rem;font-size:.8rem;opacity:.6}
+
+@media(max-width:640px){
+  .hero-stats{gap:2rem}
+  .survey-body{padding:1.5rem}
+  .roadmap::before{right:18px}
+  .roadmap-dot{min-width:38px;height:38px}
+  .form-embed iframe{min-height:500px}
+  .why-quote::before,.why-quote::after{font-size:2.5rem}
+  .why-quote::before{right:-12px}
+  .why-quote::after{left:-12px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <canvas id="stars"></canvas>
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="badge-dot"></span>پروژه دسترسی آزاد علمی</div>
+    <h1>روشنا</h1>
+    <p class="hero-sub">نوری بر علم، پژوهش و هوش مصنوعی<br>دسترسی بدون مرز برای جامعه علمی ایران</p>
+    <a href="#survey" class="hero-cta">
+      <span>مشارکت در نیازسنجی</span>
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </a>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="hero-stat-num">۲۵م+</span><span class="hero-stat-label">مقاله اپن اکسس</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">روزانه</span><span class="hero-stat-label">به‌روزرسانی خودکار</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">رایگان</span><span class="hero-stat-label">برای همیشه</span></div>
+    </div>
+  </div>
+
+  <div class="wave-divider">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,60 C200,110 400,10 600,60 C800,110 1000,10 1200,60 L1200,120 L0,120 Z" class="fill"/>
+    </svg>
+  </div>
+</header>
+
+<!-- WHY ROSHANA -->
+<section class="why-section">
+  <div class="why-inner">
+    <div class="why-tag">چرا روشنا؟</div>
+    <div class="why-quote">علم حق همه است،<br>نه امتیاز عده‌ای</div>
+    <div class="why-divider"></div>
+    <div class="why-body">
+      <p><strong>روشنا</strong> یک ابتکار داوطلبانه است که با هدف بازگرداندن دسترسی عادلانه به منابع علمی آزاد به دانشجویان، پژوهشگران و اساتید داخل ایران شکل گرفته است.</p>
+      <p style="margin-top:.8rem">محتوا روی <strong>سرورهای داخلی</strong> میزبانی می‌شود — بدون نیاز به اینترنت بین‌الملل.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <p class="section-tag reveal">خدمات ما</p>
+      <h2 class="section-title reveal reveal-delay-1">روشنا چه ارائه می‌دهد؟</h2>
+      <p class="section-desc reveal reveal-delay-2">زیرساختی برای بازگرداندن دسترسی علمی به جامعه پژوهشی ایران</p>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card reveal reveal-delay-1">
+        <div class="card-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg>
+        </div>
+        <h3>منابع علمی روز</h3>
+        <p>مقالات اپن اکسس، پیش‌چاپ‌ها، کتاب‌ها و دوره‌های آموزشی باز بطور کاملا رایگان</p>
+      </div>
+
+      <div class="card reveal reveal-delay-2">
+        <div class="card-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z"/></svg>
+        </div>
+        <h3>هوش مصنوعی</h3>
+        <p>دسترسی به قدرتمندترین مدل‌های AI برای پژوهش، نگارش مقاله و تحلیل داده — رایگان یا با کمترین هزینه</p>
+      </div>
+
+      <div class="card reveal reveal-delay-3">
+        <div class="card-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9"/></svg>
+        </div>
+        <h3>دسترسی از اینترانت</h3>
+        <p>محتوا روی سرورهای داخل ایران ذخیره می‌شود؛ بدون نیاز به اینترنت بین‌الملل یا فیلترشکن</p>
+      </div>
+    </div>
+
+    <div class="highlight-box reveal">
+      <span class="highlight-label">گزینه‌ای بالقوه در حال بررسی</span>
+      <p>علاوه بر منابع علمی، در حال بررسی راهکارهای فنی برای ارائه دسترسی به <strong>قدرتمندترین مدل‌های هوش مصنوعی</strong> برای کاربران داخل ایران هستیم.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SURVEY -->
+<section id="survey" style="background:#f1f5f9">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-tag reveal">فراخوان نیازسنجی</p>
+      <h2 class="section-title reveal reveal-delay-1">صدای شما پایه این پروژه‌ست</h2>
+      <p class="section-desc reveal reveal-delay-2">اگر در ایران هستید، چند دقیقه وقت بگذارید — نظرات شما مستقیماً شکل این سیستم را تعیین می‌کند</p>
+    </div>
+
+    <div class="survey-wrap reveal">
+      <div class="survey-head">
+        <h2>نیازسنجی جامعه علمی ایران</h2>
+        <p>صادقانه بنویسید — هر تجربه‌ای ارزشمند است</p>
+      </div>
+      <div class="survey-body">
+        <p class="survey-intro">به این پرسش‌ها پاسخ دهید تا بتوانیم دقیقاً آنچه نیاز دارید را بسازیم:</p>
+        <ul class="questions-list">
+          <li><span class="q-num">۱</span>دسترسی فعلی شما به اینترانت و منابع علمی داخلی چگونه است؟ چه چیزی مسدود است؟</li>
+          <li><span class="q-num">۲</span>فوری‌ترین نیاز شما چیست؟ مقاله، کتاب رفرنس، دیتاست، دوره ویدئویی، یا ابزار برنامه‌نویسی؟</li>
+          <li><span class="q-num">۳</span>رشته تحصیلی یا حوزه تخصصی شما چیست و کدام منابع برایتان حیاتی‌ترند؟</li>
+          <li><span class="q-num">۴</span>محدودیت فنی خاصی در دسترسی به سرویس‌های میزبان داخل ایران تجربه کرده‌اید؟</li>
+          <li><span class="q-num">۵</span>انتظارات دیگری از این پلتفرم دارید؟</li>
+        </ul>
+
+        <div class="form-embed">
+          <iframe src="https://forms.gle/m9YxHJVy7LFJvpvt9" title="فرم نیازسنجی روشنا">در حال بارگذاری فرم...</iframe>
+        </div>
+        
+        <div class="form-fallback">
+          <p style="color:var(--slate);margin-bottom:1rem;font-size:.9rem">اگر فرم در بالا نمایش داده نشد، می‌توانید از طریق دکمه زیر آن را باز کنید:</p>
+          <a href="https://forms.gle/m9YxHJVy7LFJvpvt9" target="_blank" rel="noopener" class="fallback-btn">
+            <span>باز کردن فرم نیازسنجی</span>
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <p class="section-tag reveal">نقشه راه</p>
+      <h2 class="section-title reveal reveal-delay-1">کجا هستیم و کجا می‌رویم</h2>
+    </div>
+    <div class="roadmap">
+      <div class="roadmap-item reveal">
+        <div class="roadmap-dot active">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </div>
+        <div class="roadmap-card">
+          <h4>شنیدن صدای شما <span class="roadmap-pill pill-active">در حال انجام</span></h4>
+          <p>نیازسنجی از جامعه علمی داخل ایران برای شناخت دقیق وضعیت و اولویت‌بندی محتوا</p>
+        </div>
+      </div>
+      <div class="roadmap-item reveal reveal-delay-1">
+        <div class="roadmap-dot">۲</div>
+        <div class="roadmap-card">
+          <h4>جذب حمایت <span class="roadmap-pill pill-next">بعدی</span></h4>
+          <p>فراخوان به ایرانیان خارج از کشور برای مشارکت فنی، مالی و طراحی زیرساخت</p>
+        </div>
+      </div>
+      <div class="roadmap-item reveal reveal-delay-2">
+        <div class="roadmap-dot">۳</div>
+        <div class="roadmap-card">
+          <h4>توسعه و راه‌اندازی</h4>
+          <p>پیاده‌سازی سیستم دانلود خودکار، راه‌اندازی سرورهای داخلی و آزمایش اولیه</p>
+        </div>
+      </div>
+      <div class="roadmap-item reveal reveal-delay-3">
+        <div class="roadmap-dot">۴</div>
+        <div class="roadmap-card">
+          <h4>دسترسی عمومی</h4>
+          <p>باز کردن دسترسی رایگان برای همه کاربران در ایران از طریق اینترانت</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHARE -->
+<section style="background:#f1f5f9">
+  <div class="container">
+    <div class="share-inner reveal">
+      <p class="section-tag">همراه شوید</p>
+      <h2 class="section-title" style="margin-top:.5rem">این پیام را منتشر کنید</h2>
+      <p class="section-desc" style="margin-top:.7rem">اگر پژوهشگر یا دانشجوی داخل ایران می‌شناسید، این صفحه را برایشان بفرستید.</p>
+      <div class="share-btns">
+        <a class="share-btn btn-x" href="https://twitter.com/intent/tweet?text=%F0%9F%94%AC+%D8%B1%D9%88%D8%B4%D9%86%D8%A7+%E2%80%94+%D8%B9%D9%84%D9%85+%D8%A8%D8%B1%D8%A7%DB%8C+%D9%87%D9%85%D9%87+%F0%9F%87%AE%F0%9F%87%B7&hashtags=%D8%B9%D9%84%D9%85_%D8%A2%D8%B2%D8%A7%D8%AF%2C%D8%B1%D9%88%D8%B4%D9%86%D8%A7" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X / توییتر
+        </a>
+        <a class="share-btn btn-telegram" href="https://t.me/share/url?url=https%3A%2F%2Froshana.ir&text=%D8%B1%D9%88%D8%B4%D9%86%D8%A7+%E2%80%94+%D8%B9%D9%84%D9%85+%D8%A8%D8%B1%D8%A7%DB%8C+%D9%87%D9%85%D9%87" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 13.667l-2.965-.924c-.644-.204-.657-.644.136-.953l11.57-4.461c.537-.194 1.006.131.983.892z"/></svg>
+          تلگرام
+        </a>
+        <a class="share-btn btn-linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Froshana.ir" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          لینکدین
+        </a>
+        <button class="share-btn btn-copy" onclick="copyMsg()">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          کپی متن
+        </button>
+      </div>
+      <div class="copy-toast" id="copyToast">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+        متن کپی شد
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-logo">روشنا</div>
+    <div class="footer-tag">علم بدون مرز، دانش بدون محدودیت</div>
+    <div class="footer-line"></div>
+    <p style="font-size:.88rem">Roshana Project © 2026</p>
+    <small>ساخته شده با ❤️ برای جامعه علمی ایران</small>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const c=document.getElementById('stars');
+  const ctx=c.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight}
+  function init(){stars=[];for(let i=0;i<130;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.3,a:Math.random(),speed:Math.random()*.004+.001,phase:Math.random()*Math.PI*2})}
+  function draw(t){ctx.clearRect(0,0,W,H);stars.forEach(s=>{const o=.3+.7*Math.abs(Math.sin(t*s.speed+s.phase));ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(251,191,36,${o*s.a})`;ctx.fill()});requestAnimationFrame(draw)}
+  resize();init();draw(0);
+  window.addEventListener('resize',()=>{resize();init()});
+})();
+
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+function copyMsg(){
+  navigator.clipboard.writeText(`سلام همکاران و هموطنان گرامی،
+
+به عنوان یک دانشجوی دکتری ایرانی در آمریکا، وضعیت محدودیت دسترسی جامعه علمی ایران به منابع پژوهشی روز را به دقت دنبال می‌کنم. می‌دانم که بسیاری از پژوهشگران، دانشجویان و اساتید عزیز در داخل کشور، با چالش جدی اتصال به اینترنت بین‌الملل و دسترسی به مقالات، کتاب‌ها و دوره‌های آموزشی مواجه هستند.
+
+در حال برنامه‌ریزی و طراحی یک زیرساخت فنی هستم که قادر است به صورت خودکار و روزانه، محتوای علمی دسترسی آزاد — شامل مقالات اپن اکسس، Preprints، کتاب‌ها و منابع آموزشی باز — را روی سرورهای مستقر در ایران جمع‌آوری کرده و از طریق اینترانت کشور به صورت کاملاً رایگان در اختیار شما قرار دهد.
+
+علاوه بر این، در حال بررسی راه‌هایی هستیم تا بتوانیم دسترسی به قدرتمندترین مدل‌های هوش مصنوعی را هم برای شما در داخل ایران — بطور رایگان یا با کمترین هزینه — فراهم کنیم.
+
+هدف نهایی، توانمندسازی جامعه علمی ایران برای ادامه یادگیری و پژوهش با کمترین وابستگی به اینترنت بین‌الملل است.
+
+لطفاً به پرسش‌های زیر پاسخ دهید:
+۱. دسترسی فعلی شما به اینترانت و منابع علمی داخلی چگونه است؟
+۲. فوری‌ترین نیازتون چیه؟
+۳. رشته و منابع حیاتی شما کدام‌اند؟
+۴. محدودیت فنی خاصی تجربه کرده‌اید؟
+۵. انتظارات دیگری از این پلتفرم دارید؟
+
+با سپاس،
+کیانوش حسینی`).then(()=>{
+    const t=document.getElementById('copyToast');
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),2800);
+  });
+}
+</script>
+</body>
+</html>
