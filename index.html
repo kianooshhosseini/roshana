@@ -105,6 +105,11 @@ section{padding:5rem 0}
 .highlight-box p{color:var(--slate);font-size:.97rem;line-height:1.8}
 .highlight-box strong{color:var(--teal-dark)}
 
+/* DISCLAIMER INLINE */
+.inline-disclaimer{display:flex;align-items:center;gap:.75rem;margin-top:1.5rem;padding:1.1rem 1.4rem;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-xs)}
+.inline-disclaimer svg{width:20px;height:20px;color:var(--teal);flex-shrink:0}
+.inline-disclaimer p{color:var(--slate);font-size:.92rem;font-weight:500;line-height:1.7}
+
 /* SURVEY */
 .survey-wrap{background:var(--surface);border-radius:var(--radius-lg);box-shadow:var(--shadow-xl);overflow:hidden;border:1px solid var(--border)}
 .survey-head{background:linear-gradient(135deg,var(--teal-dark) 0%,#0d4a46 100%);padding:2.5rem 2rem;text-align:center;position:relative;overflow:hidden}
@@ -161,6 +166,7 @@ footer{background:var(--ink);color:var(--muted);padding:3.5rem 0 2rem;text-align
 .footer-logo{font-size:1.6rem;font-weight:900;color:#fff;margin-bottom:.3rem}
 .footer-tag{font-size:.88rem;color:#475569;margin-bottom:1.6rem}
 .footer-line{width:50px;height:3px;border-radius:2px;margin:1.5rem auto;background:linear-gradient(90deg,var(--amber),var(--teal))}
+.footer-credit{font-size:.82rem;color:#64748b;margin-bottom:.3rem}
 footer small{display:block;margin-top:.5rem;font-size:.8rem;opacity:.6}
 
 @media(max-width:640px){
@@ -172,6 +178,8 @@ footer small{display:block;margin-top:.5rem;font-size:.8rem;opacity:.6}
   .why-quote::before,.why-quote::after{font-size:2.5rem}
   .why-quote::before{right:-12px}
   .why-quote::after{left:-12px}
+  .inline-disclaimer{padding:1rem}
+  .inline-disclaimer p{font-size:.85rem}
 }
 </style>
 </head>
@@ -211,7 +219,7 @@ footer small{display:block;margin-top:.5rem;font-size:.8rem;opacity:.6}
     <div class="why-quote">علم حق همه است،<br>نه امتیاز عده‌ای</div>
     <div class="why-divider"></div>
     <div class="why-body">
-      <p><strong>روشنا</strong> یک ابتکار داوطلبانه است که با هدف بازگرداندن دسترسی عادلانه به منابع علمی آزاد به دانشجویان، پژوهشگران و اساتید داخل ایران شکل گرفته است.</p>
+      <p><strong>روشنا</strong> یک ابتکار داوطلبانه است که با هدف بازگرداندن دسترسی عادلانه به منابع علمی آزاد به دانشجویان، پژوهشگران و اساتید داخل ایران شکل گرفته.</p>
       <p style="margin-top:.8rem">محتوا روی <strong>سرورهای داخلی</strong> میزبانی می‌شود — بدون نیاز به اینترنت بین‌الملل.</p>
     </div>
   </div>
@@ -256,6 +264,11 @@ footer small{display:block;margin-top:.5rem;font-size:.8rem;opacity:.6}
       <span class="highlight-label">گزینه‌ای بالقوه در حال بررسی</span>
       <p>علاوه بر منابع علمی، در حال بررسی راهکارهای فنی برای ارائه دسترسی به <strong>قدرتمندترین مدل‌های هوش مصنوعی</strong> برای کاربران داخل ایران هستیم.</p>
     </div>
+
+    <div class="inline-disclaimer reveal">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"/></svg>
+      <p>روشنا یک ابتکار داوطلبانه علمی است و هیچ‌گونه وابستگی سیاسی یا سازمانی ندارد.</p>
+    </div>
   </div>
 </section>
 
@@ -277,7 +290,7 @@ footer small{display:block;margin-top:.5rem;font-size:.8rem;opacity:.6}
         <p class="survey-intro">به این پرسش‌ها پاسخ دهید تا بتوانیم دقیقاً آنچه نیاز دارید را بسازیم:</p>
         <ul class="questions-list">
           <li><span class="q-num">۱</span>دسترسی فعلی شما به اینترانت و منابع علمی داخلی چگونه است؟ چه چیزی مسدود است؟</li>
-          <li><span class="q-num">۲</span>فوری‌ترین نیاز شما چیست؟ مقاله، کتاب رفرنس، دیتاست، دوره ویدئویی، یا ابزار برنامه‌نویسی؟</li>
+          <li><span class="q-num">۲</span>فوری‌ترین نیازتون چیه؟ مقاله، کتاب رفرنس، دیتاست، دوره ویدئویی، یا ابزار برنامه‌نویسی؟</li>
           <li><span class="q-num">۳</span>رشته تحصیلی یا حوزه تخصصی شما چیست و کدام منابع برایتان حیاتی‌ترند؟</li>
           <li><span class="q-num">۴</span>محدودیت فنی خاصی در دسترسی به سرویس‌های میزبان داخل ایران تجربه کرده‌اید؟</li>
           <li><span class="q-num">۵</span>انتظارات دیگری از این پلتفرم دارید؟</li>
@@ -380,7 +393,7 @@ footer small{display:block;margin-top:.5rem;font-size:.8rem;opacity:.6}
     <div class="footer-tag">علم بدون مرز، دانش بدون محدودیت</div>
     <div class="footer-line"></div>
     <p style="font-size:.88rem">Roshana Project © 2026</p>
-    <small>ساخته شده با ❤️ برای جامعه علمی ایران</small>
+    <p class="footer-credit">ساخته شده با ❤️ توسط کیانوش حسینی برای جامعه علمی ایران</p>
   </div>
 </footer>
 
